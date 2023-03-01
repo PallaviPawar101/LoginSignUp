@@ -25,16 +25,15 @@ export default {
     };
   },
   methods: {
-    async handleSubmit(e) {
-        e.preventDefault();
+    async handleSubmit() {
       let res = await axios.post(`http://localhost:5500/users`, {
         email: this.email,
         password: this.password,
         name: this.name,
       });
-      let {data} = await axios.get(`http://localhost:5500/users?email=${res.data.email}`);
-      console.log(data);
-      this.$router.push({name:'HOME'})
+
+      console.log(res.data);
+      this.$router.push("/login");
     },
   },
 };

@@ -24,9 +24,14 @@ export default {
   },
   methods: {
     async handleSubmit(e) {
-        e.preventDefault();
-       let {data} = await axios.get(`http://localhost:5500/users?email=${this.email}&password=${this.password}`);
-      console.log(data);
+      e.preventDefault();
+      let { data } = await axios.get(
+        `http://localhost:5500/users?email=${this.email}&password=${this.password}`
+      );
+      if (data.length > 0) {  
+        sessionStorage.setItem("userLoggedIn", new Date().getTime()); // current time stamp through get date. if user credentials are valid current details in sessionstorage. 
+        this.$router.push('/');
+      }
     },
   },
 };
